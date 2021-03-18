@@ -7,21 +7,26 @@ fn main() {
 
     let secret = rand::thread_rng().gen_range(1,101);
     println!("The secret number is: {}", secret);
-    println!("Please input your guess:");
-    let mut guess = String::new();
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("failed to read the line");
+    loop {
 
-    let guess: u32 = guess.trim().parse().expect("please numbers only!");
+        println!("Please input your guess:");
+        let mut guess = String::new();
 
-    println!("you guessed: {}", guess);
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("failed to read the line");
 
-    match guess.cmp($secret) {
-        Ordering::Less => println!("Too small"),
-        Ordering::Greater => println!("too big!"),
-        Ordering::Equal => println!("you win"),
+        let guess: u32 = guess.trim().parse().expect("please numbers only!");
+
+        println!("you guessed: {}", guess);
+
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("Too small"),
+            Ordering::Greater => println!("too big!"),
+            Ordering::Equal => println!("you win"),
+           }
     }
+
 
 }
